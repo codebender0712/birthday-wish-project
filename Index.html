@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Kaju Katli! 🎂</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        /* Default: Non-Scrollable for the initial view (page 1) */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling initially */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d0d0d;
+        }
+
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* --- Page 1 Specific Styles (Full Screen, No Scroll) --- */
+        #page1 {
+            background-image: url('Bg_image.jpg'); /* Your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #page1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Dark gradient overlay */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.9) 100%); 
+            z-index: 0;
+        }
+
+        #lily-bouquet {
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+            cursor: pointer;
+            z-index: 1; /* Bring bouquet above gradient */
+            width: 16rem; /* Tailwind w-64 */
+        }
+        
+        @media (min-width: 768px) {
+             #lily-bouquet {
+                width: 20rem; /* Tailwind w-80 */
+             }
+        }
+
+
+        #lily-bouquet:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* --- Page 2 Specific Styles (Scrollable Content) --- */
+        #page2 {
+            min-height: 100vh; /* Ensure it takes at least one full screen height */
+            background: linear-gradient(to top right, #1a1a1a, #333333, #1a1a1a); /* Dark gradient for page 2 */
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center; /* Center content vertically if it fits on one screen */
+            align-items: center;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 2rem 1rem; /* Added vertical padding for better look, reduced horizontal padding */
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: relative; 
+            box-sizing: border-box;
+        }
+        
+        /* Ensure content inside page 2 scales well */
+        #page2 > * {
+            max-width: 95%; /* Increased max-width for better use of space */
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Cake image sizing */
+        #page2 img {
+            width: 12rem; /* Reduced size for better mobile fit */
+            height: auto;
+        }
+
+        @media (min-width: 768px) {
+             #page2 img {
+                width: 16rem; /* Tailwind w-64 */
+             }
+        }
+        
+        /* Confetti Styles (kept the same, they're fine) */
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 16px; 
+            background-color: #ffd700; 
+            opacity: 0;
+            animation: fall 3s forwards ease-in;
+            z-index: 100;
+            border-radius: 2px;
+        }
+
+        .confetti-piece:nth-child(2n) { background-color: #ff69b4; }
+        .confetti-piece:nth-child(3n) { background-color: #00bfff; }
+        .confetti-piece:nth-child(4n) { background-color: #ffffff; }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotateZ(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(100vh) rotateZ(720deg) scale(1); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <audio id="birthdaySong" src="Birthday-song.mp3" loop preload="auto"></audio>
+    <div id="page1" class="relative">
+        <h1 class="font-dancing text-5xl md:text-7xl text-white mb-8 drop-shadow-lg z-10 text-center px-4">
+            Click the Bouquet for a Surprise!
+        </h1>
+        <img id="lily-bouquet" src="Mixed_Lillies.png" alt="Beautiful Lily Bouquet" class="rounded-lg shadow-lg"> 
+    </div>
+
+    <div id="page2" class="relative"> 
+        <div id="confetti-container" class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"></div>
+
+        <h1 class="font-dancing text-4xl sm:text-5xl md:text-6xl text-yellow-400 mb-6 mt-6 drop-shadow-lg z-20 px-2">
+            Happy Birthday, Meri Pyaari long distance badi behnaa, kaju katli, meri rasmalai! 🎉
+        </h1>
+        <p class="text-md sm:text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto z-20 whitespace-pre-line px-4">
+            I hope aapko mera ye gift pasand aaya hoga hehehe😁. Aapki Jadbuddhi computer science engineer h toh itna toh banta hi h naa😉. 
+            
+            I don't know main kya kahu kya nahi but I really want to thank youu mera hameshaa saath dene k liye, mere acche aur bure har waqt main mere saath rehne k liye mujhpar trust karne k liye ki main bhi kuchh kr sakti hu aur itna understand karne k liye aur meri galtiyon prr mujhe haq se daantne k liye 🥹🫂. 
+            
+            You know maine aapko btaya tha ki mujhe bhi ek big sis chahiye thii?! abb mujhe pta lga bhagwaan ji ne sahi hi kiya kyunki agr meri badi behen hoti toh main aapse kaise milta?! 😁 
+            
+            mujhe nhii smjh aa rha bss I wish everytime to shyam baba ki hum hamesha saath rahein aur aap aur aapke loved ones hamesha khush rahein. Aapki life mein hamesha success aaye aur aap apne har dream ko achieve karo yehi meri wish h. I am really grateful to have you in my life. 
+            
+            And haa lo aapse ek hi piece khaya jaata h toh ye rhaa aapka **ek piece of cake** 😛😂
+        </p>
+        
+        <p class="font-dancing text-2xl sm:text-3xl md:text-4xl text-red-400 mb-6 font-bold drop-shadow-lg z-20 px-4">
+            Enjoy your Cake! Lovee Youu, keep smiling and Happiest Birthday Again! 💖🎂
+        </p>
+
+        <img src="cake-slice-on-plate.png" alt="Delicious Chocolate Cake Slice on a Plate" class="shadow-xl z-20 mb-8"> 
+    </div>
+
+    <script>
+        const bouquet = document.getElementById('lily-bouquet');
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const birthdaySong = document.getElementById('birthdaySong');
+        const confettiContainer = document.getElementById('confetti-container');
+        const htmlElement = document.documentElement; // Reference to the <html> tag
+
+        bouquet.addEventListener('click', () => {
+            // 1. **Allow Scrolling:** Remove the 'overflow: hidden' property from html/body
+            htmlElement.style.overflowY = 'auto'; // Allow vertical scrolling on <html>
+            document.body.style.overflowY = 'auto'; // Allow vertical scrolling on <body> (for compatibility)
+
+            // 2. Hide Page 1
+            page1.style.display = 'none';
+
+            // 3. Show Page 2 with fade-in
+            page2.style.display = 'flex';
+            setTimeout(() => {
+                page2.style.opacity = 1;
+            }, 50); 
+
+            // 4. Play music (This may still be blocked until the browser allows it)
+            birthdaySong.play().catch(e => console.error("Error playing audio:", e)); 
+
+            // 5. Trigger confetti
+            createConfetti();
+        });
+
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff69b4', '#00bfff', '#ffffff']; 
+            for (let i = 0; i < 100; i++) { 
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confettiContainer.appendChild(confetti);
+
+                // Add variety to confetti fall/rotation
+                if (Math.random() > 0.5) {
+                    confetti.style.animationName = 'fall, rotate';
+                    confetti.style.animationDuration = '3s, 5s';
+                    confetti.style.animationTimingFunction = 'ease-in, linear';
+                    confetti.style.animationIterationCount = 'forwards, infinite';
+                }
+            }
+        }
+
+        // Optional: Preload images for a smoother experience
+        const preloadImage1 = new Image();
+        preloadImage1.src = 'Bg_image.jpg';
+        const preloadImage2 = new Image();
+        preloadImage2.src = 'Mixed_Lillies.png';
+        const preloadImage3 = new Image();
+        preloadImage3.src = 'cake-slice-on-plate.png'; 
+    </script>
+</body>
+</html>
